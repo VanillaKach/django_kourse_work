@@ -1,10 +1,21 @@
+from linecache import cache
+
+from django.contrib import messages
+from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count, Case, When, IntegerField
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Client, Message, Mailing, MailingLog
 from .forms import ClientForm, MessageForm, MailingForm
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
+from django.views.decorators.cache import cache_page
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 def home(request):
     total_mailings = Mailing.objects.count()
@@ -35,6 +46,7 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
+        logger.info(f"User {self.request.user} created a new client: {form.instance.email}")
         return super().form_valid(form)
 
 
@@ -95,12 +107,21 @@ class MessageDeleteView(LoginRequiredMixin, DeleteView):
         return Message.objects.filter(owner=self.request.user)
 
 
-class MailingListView(LoginRequiredMixin, ListView):
+class MailingListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Mailing
     template_name = 'mailing/mailing_list.html'
 
     def get_queryset(self):
         return Mailing.objects.filter(owner=self.request.user)
+
+    def test_func(self):
+        return self.request.user.is_authenticated
+
+    def get_queryset(self):
+        queryset = Mailing.objects.all()
+        if not self.request.user.is_staff:
+            queryset = queryset.filter(owner=self.request.user)
+        return queryset
 
 
 class MailingCreateView(LoginRequiredMixin, CreateView):
@@ -156,6 +177,16 @@ class MailingLogListView(LoginRequiredMixin, ListView):
         return context
 
 
+class ManagerMailingListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    model = Mailing
+    template_name = 'mailing/manager_mailing_list.html'
+    permission_required = 'mailing.view_all_mailings'
+    context_object_name = 'mailings'
+
+    def get_queryset(self):
+        return Mailing.objects.all()
+
+
 def toggle_mailing_status(request, pk):
     mailing = get_object_or_404(Mailing, pk=pk, owner=request.user)
 
@@ -166,3 +197,87 @@ def toggle_mailing_status(request, pk):
 
     mailing.save()
     return redirect('mailing:mailing_list')
+
+
+@permission_required('mailing.disable_mailings')
+def disable_mailing(request, pk):
+    mailing = get_object_or_404(Mailing, pk=pk)
+    mailing.status = Mailing.COMPLETED
+    mailing.save()
+    messages.success(request, f'Рассылка {mailing.id} была отключена')
+    return redirect('mailing:manager_mailing_list')
+
+
+@login_required
+def statistics(request):
+    # Общая статистика
+    total_mailings = Mailing.objects.count()
+    active_mailings = Mailing.objects.filter(status=Mailing.STARTED).count()
+    unique_clients = Client.objects.values('email').distinct().count()
+
+    # Статистика по пользователю
+    user_mailings = Mailing.objects.filter(owner=request.user).count()
+
+    # Статистика по логам
+    mailing_logs = MailingLog.objects.filter(mailing__owner=request.user)
+    success_logs = mailing_logs.filter(status=MailingLog.SUCCESS).count()
+    failure_logs = mailing_logs.filter(status=MailingLog.FAILURE).count()
+
+    # Популярные сообщения
+    popular_messages = Message.objects.filter(owner=request.user).annotate(
+        mailing_count=Count('mailing')
+    ).order_by('-mailing_count')[:5]
+
+    context = {
+        'total_mailings': total_mailings,
+        'active_mailings': active_mailings,
+        'unique_clients': unique_clients,
+        'user_mailings': user_mailings,
+        'success_logs': success_logs,
+        'failure_logs': failure_logs,
+        'popular_messages': popular_messages,
+    }
+
+    return render(request, 'mailing/statistics.html', context)
+
+
+@cache_page(60 * 15)  # Кешируем на 15 минут
+def home(request):
+    total_mailings = cache.get('total_mailings')
+    if not total_mailings:
+        total_mailings = Mailing.objects.count()
+        cache.set('total_mailings', total_mailings, 60 * 15)
+
+    active_mailings = cache.get('active_mailings')
+    if not active_mailings:
+        active_mailings = Mailing.objects.filter(status=Mailing.STARTED).count()
+        cache.set('active_mailings', active_mailings, 60 * 5)  # 5 минут для активных
+
+    unique_clients = cache.get('unique_clients')
+    if not unique_clients:
+        unique_clients = Client.objects.values('email').distinct().count()
+        cache.set('unique_clients', unique_clients, 60 * 60)  # 1 час для клиентов
+
+    context = {
+        'total_mailings': total_mailings,
+        'active_mailings': active_mailings,
+        'unique_clients': unique_clients,
+    }
+    return render(request, 'mailing/home.html', context)
+
+
+# Для класс-базированных представлений
+class MailingListView(LoginRequiredMixin, ListView):
+    model = Mailing
+    template_name = 'mailing/mailing_list.html'
+
+    @method_decorator(cache_page(60 * 5))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_queryset(self):
+        queryset = cache.get(f'mailings_{self.request.user.id}')
+        if not queryset:
+            queryset = Mailing.objects.filter(owner=self.request.user)
+            cache.set(f'mailings_{self.request.user.id}', queryset, 60 * 5)
+        return queryset

@@ -2,6 +2,16 @@ from django.db import models
 from users.models import User
 
 
+def save(self, *args, **kwargs):
+    if self.status == self.STARTED and not self.pk:
+        # При создании новой рассылки со статусом "Запущена"
+        from mailing.tasks import send_mailing
+        super().save(*args, **kwargs)
+        send_mailing.delay(self.id)
+    else:
+        super().save(*args, **kwargs)
+
+
 class Client(models.Model):
     email = models.EmailField(verbose_name='Email')
     full_name = models.CharField(max_length=255, verbose_name='ФИО')
