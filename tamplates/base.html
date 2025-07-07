@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    {% cache 3600 head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Сервис рассылок{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% endcache %}
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    {% cache 3600 header %}
     {% include 'includes/header.html' %}
+    {% endcache %}
 
     <div class="container mt-4">
         {% block content %}{% endblock %}
     </div>
 
+    {% cache 3600 footer %}
     {% include 'includes/footer.html' %}
+    {% endcache %}
 
+    {% cache 3600 scripts %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% endcache %}
     {% block extra_js %}{% endblock %}
 </body>
 </html>
