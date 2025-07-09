@@ -1,21 +1,15 @@
+import os
 from pathlib import Path
 from dotenv import load_dotenv
-import os
 
 
 load_dotenv()
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = os.getenv('DEBUG') == 'True'
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-o)mm$m45l_yyf&b-p7cd$x)@)%4cyb^w9*71u=%4)+b*1fm634"
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -44,10 +38,15 @@ ROOT_URLCONF = "config.urls"
 
 WSGI_APPLICATION = "config.wsgi.application"
 
+# Настройки PostgreSQL
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mailing',
+        'USER': 'mailing',
+        'PASSWORD': 'mailing',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -80,24 +79,23 @@ CACHES = {
 # Время жизни кеша по умолчанию (в секундах)
 CACHE_TTL = 60 * 15  # 15 минут
 
-# Для кеширования шаблонов
+# Настройки шаблонов
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # Обратите внимание на правильное написание
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'libraries': {
-                'staticfiles': 'django.templatetags.static',
-            }
         },
     },
 ]
+
 
 LANGUAGE_CODE = "en-us"
 
@@ -116,7 +114,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 AUTH_USER_MODEL = 'users.User'
 
-STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
