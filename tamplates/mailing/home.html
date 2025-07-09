@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-{% load cache %}
 
 {% block title %}Главная{% endblock %}
 
-{% cache 600 home_content request.user.is_authenticated %}
 {% block content %}
 <div class="row">
     <div class="col-md-12">
@@ -40,12 +38,7 @@
             <div class="mt-4">
                 <p>Для работы с сервисом необходимо <a href="{% url 'users:login' %}" class="btn btn-outline-primary">Войти</a> или <a href="{% url 'users:register' %}" class="btn btn-primary">Зарегистрироваться</a>.</p>
             </div>
-        {% else %}
-            <div class="mt-4">
-                <a href="{% url 'mailing:statistics' %}" class="btn btn-info">Просмотреть статистику</a>
-            </div>
         {% endif %}
     </div>
 </div>
 {% endblock %}
-{% endcache %}

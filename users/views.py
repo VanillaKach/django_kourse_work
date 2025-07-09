@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 from .models import User
 from .forms import UserRegisterForm, UserProfileForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 class UserLoginView(LoginView):
@@ -26,8 +27,12 @@ class UserRegisterView(CreateView):
         login(self.request, self.object)
         return response
 
+class ManagerRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_staff
 
-class UserProfileView(DetailView):
+
+class UserProfileView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'users/profile.html'
 
@@ -35,7 +40,7 @@ class UserProfileView(DetailView):
         return self.request.user
 
 
-class UserProfileUpdateView(UpdateView):
+class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     template_name = 'users/profile_update.html'

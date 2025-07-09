@@ -16,6 +16,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'mailing:mailing_list' %}">Рассылки</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mailing:statistics' %}">Статистика</a>
+                    </li>
                 {% endif %}
             </ul>
             <ul class="navbar-nav">
@@ -26,19 +29,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'mailing:statistics' %}">Статистика</a>
-                    </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:login' %}">Вход</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:register' %}">Регистрация</a>
-                    </li>
-                {% if user.is_staff %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'mailing:manager_mailing_list' %}">Менеджер</a>
                     </li>
                 {% endif %}
             </ul>
