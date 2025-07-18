@@ -1,4 +1,4 @@
-from linecache import cache
+from django.core.cache import cache
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
