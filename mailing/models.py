@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from django.contrib.auth import get_user_model
 
 
 def save(self, *args, **kwargs):
@@ -84,9 +85,9 @@ class MailingLog(models.Model):
         (FAILURE, 'Не успешно'),
     ]
 
-    timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время попытки')
+    attempt_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата и время попытки')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, verbose_name='Статус попытки')
-    response = models.TextField(blank=True, null=True, verbose_name='Ответ сервера')
+    server_response = models.TextField(verbose_name='Ответ сервера')
     mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, verbose_name='Рассылка')
 
     class Meta:
