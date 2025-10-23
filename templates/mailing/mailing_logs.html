@@ -1,0 +1,22 @@
+{% extends 'includes/base.html' %}
+{% block content %}
+<h1>Логи рассылки #{{ mailing.id }}</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Статус</th>
+            <th>Ответ сервера</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.attempt_time }}</td>
+            <td>{{ log.get_status_display }}</td>
+            <td>{{ log.server_response }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
