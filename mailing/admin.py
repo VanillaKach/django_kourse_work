@@ -25,6 +25,5 @@ class MailingAdmin(admin.ModelAdmin):
 
 @admin.register(MailingLog)
 class MailingLogAdmin(admin.ModelAdmin):
-    list_display = ('timestamp', 'status', 'mailing')
+    list_display = ('id', 'status', 'mailing')
     list_filter = ('status', 'mailing__owner')
-    readonly_fields = ('timestamp',)
