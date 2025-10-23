@@ -239,3 +239,35 @@ INFO 2025-10-21 18:51:40,234 basehttp "GET /messages/ HTTP/1.1" 200 2742
 INFO 2025-10-21 18:51:41,586 basehttp "GET /messages/create/ HTTP/1.1" 200 3239
 INFO 2025-10-21 18:51:44,500 basehttp "GET /mailings/ HTTP/1.1" 200 3274
 INFO 2025-10-21 18:51:45,004 basehttp "GET /mailings/create/ HTTP/1.1" 200 3759
+INFO 2025-10-23 17:09:45,746 autoreload Watching for file changes with StatReloader
+INFO 2025-10-23 17:09:49,329 basehttp "GET / HTTP/1.1" 200 3508
+WARNING 2025-10-23 17:09:49,386 log Not Found: /favicon.ico
+WARNING 2025-10-23 17:09:49,386 basehttp "GET /favicon.ico HTTP/1.1" 404 7612
+INFO 2025-10-23 17:09:58,521 basehttp "GET /users/profile/ HTTP/1.1" 200 0
+INFO 2025-10-23 17:10:10,836 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-23 17:10:13,554 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:10:15,495 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:10:16,364 basehttp "GET /mailings/ HTTP/1.1" 200 3274
+INFO 2025-10-23 17:10:18,002 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+INFO 2025-10-23 17:10:20,257 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:10:21,266 basehttp "GET /messages/create/ HTTP/1.1" 200 3239
+INFO 2025-10-23 17:10:26,798 basehttp "GET /mailings/create/ HTTP/1.1" 200 3759
+INFO 2025-10-23 17:10:38,284 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+INFO 2025-10-23 17:10:39,514 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-23 17:10:40,673 basehttp "GET /clients/create/ HTTP/1.1" 200 3602
+WARNING 2025-10-23 17:10:44,188 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:44,189 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+WARNING 2025-10-23 17:10:46,028 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:46,029 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+WARNING 2025-10-23 17:10:46,952 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:46,953 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+WARNING 2025-10-23 17:10:47,681 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:47,682 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+WARNING 2025-10-23 17:10:48,327 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:48,328 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+INFO 2025-10-23 17:11:50,108 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-23 17:11:51,111 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:11:52,381 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+INFO 2025-10-23 17:11:53,339 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:11:53,853 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-23 17:11:55,231 basehttp "GET /statistics/ HTTP/1.1" 200 4965
