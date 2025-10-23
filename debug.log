@@ -1,2 +1,344 @@
 INFO 2025-07-12 13:03:46,547 autoreload Watching for file changes with StatReloader
 INFO 2025-07-18 13:36:19,801 autoreload Watching for file changes with StatReloader
+INFO 2025-10-21 17:01:28,340 autoreload Watching for file changes with StatReloader
+INFO 2025-10-21 17:01:34,150 basehttp "GET / HTTP/1.1" 200 3202
+WARNING 2025-10-21 17:01:34,962 log Not Found: /favicon.ico
+WARNING 2025-10-21 17:01:34,963 basehttp "GET /favicon.ico HTTP/1.1" 404 7612
+INFO 2025-10-21 17:01:39,987 basehttp "GET /users/login/ HTTP/1.1" 200 2758
+INFO 2025-10-21 17:40:16,553 basehttp "GET /users/register/ HTTP/1.1" 200 4134
+INFO 2025-10-21 17:41:29,763 basehttp "POST /users/register/ HTTP/1.1" 200 4401
+INFO 2025-10-21 17:41:47,319 basehttp "POST /users/register/ HTTP/1.1" 302 0
+INFO 2025-10-21 17:41:47,333 basehttp "GET / HTTP/1.1" 200 3508
+INFO 2025-10-21 17:41:55,492 basehttp "GET /mailings/ HTTP/1.1" 200 3274
+INFO 2025-10-21 17:42:00,268 basehttp "GET /mailings/create/ HTTP/1.1" 200 0
+INFO 2025-10-21 17:42:14,274 basehttp "GET /clients/ HTTP/1.1" 200 3122
+ERROR 2025-10-21 17:42:16,322 log Internal Server Error: /messages/
+Traceback (most recent call last):
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 134, in render
+    compiled_parent = self.get_parent(context)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 131, in get_parent
+    return self.find_template(parent, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 109, in find_template
+    template, origin = context.template.engine.find_template(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/engine.py", line 163, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: includes/base.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 109, in render
+    reraise(exc, self.backend)
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 130, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: includes/base.html
+ERROR 2025-10-21 17:42:16,323 basehttp "GET /messages/ HTTP/1.1" 500 135204
+INFO 2025-10-21 17:42:33,564 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+INFO 2025-10-21 17:42:38,215 basehttp "GET /users/profile/ HTTP/1.1" 200 0
+ERROR 2025-10-21 17:46:56,326 log Internal Server Error: /messages/
+Traceback (most recent call last):
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 134, in render
+    compiled_parent = self.get_parent(context)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 131, in get_parent
+    return self.find_template(parent, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 109, in find_template
+    template, origin = context.template.engine.find_template(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/engine.py", line 163, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: includes/base.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 109, in render
+    reraise(exc, self.backend)
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 130, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: includes/base.html
+ERROR 2025-10-21 17:46:56,327 basehttp "GET /messages/ HTTP/1.1" 500 135204
+ERROR 2025-10-21 17:56:52,062 log Internal Server Error: /messages/
+Traceback (most recent call last):
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 134, in render
+    compiled_parent = self.get_parent(context)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 131, in get_parent
+    return self.find_template(parent, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 109, in find_template
+    template, origin = context.template.engine.find_template(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/engine.py", line 163, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: includes/base.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 109, in render
+    reraise(exc, self.backend)
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 130, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: includes/base.html
+ERROR 2025-10-21 17:56:52,063 basehttp "GET /messages/ HTTP/1.1" 500 135204
+INFO 2025-10-21 17:56:54,407 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-21 17:56:56,168 basehttp "GET /mailings/ HTTP/1.1" 200 3274
+INFO 2025-10-21 17:56:59,275 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+INFO 2025-10-21 18:23:34,954 autoreload Watching for file changes with StatReloader
+INFO 2025-10-21 18:23:53,481 autoreload Watching for file changes with StatReloader
+INFO 2025-10-21 18:29:55,917 autoreload Watching for file changes with StatReloader
+INFO 2025-10-21 18:29:58,420 basehttp "GET / HTTP/1.1" 200 3508
+ERROR 2025-10-21 18:30:05,248 log Internal Server Error: /messages/
+Traceback (most recent call last):
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 134, in render
+    compiled_parent = self.get_parent(context)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 131, in get_parent
+    return self.find_template(parent, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 109, in find_template
+    template, origin = context.template.engine.find_template(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/engine.py", line 163, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: includes/base.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 109, in render
+    reraise(exc, self.backend)
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 130, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: includes/base.html
+ERROR 2025-10-21 18:30:05,249 basehttp "GET /messages/ HTTP/1.1" 500 135270
+INFO 2025-10-21 18:31:20,114 basehttp "GET /mailings/ HTTP/1.1" 200 3274
+INFO 2025-10-21 18:31:20,741 basehttp "GET /mailings/create/ HTTP/1.1" 200 0
+INFO 2025-10-21 18:43:40,175 autoreload Watching for file changes with StatReloader
+INFO 2025-10-21 18:43:45,190 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-21 18:43:47,290 basehttp "GET /messages/create/ HTTP/1.1" 200 3292
+INFO 2025-10-21 18:43:51,068 basehttp "GET /mailings/ HTTP/1.1" 200 3274
+INFO 2025-10-21 18:43:51,865 basehttp "GET /mailings/create/ HTTP/1.1" 200 0
+INFO 2025-10-21 18:44:00,882 basehttp "GET /mailings/create/ HTTP/1.1" 200 0
+INFO 2025-10-21 18:51:35,203 autoreload Watching for file changes with StatReloader
+INFO 2025-10-21 18:51:36,895 basehttp "GET / HTTP/1.1" 200 3508
+INFO 2025-10-21 18:51:40,234 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-21 18:51:41,586 basehttp "GET /messages/create/ HTTP/1.1" 200 3239
+INFO 2025-10-21 18:51:44,500 basehttp "GET /mailings/ HTTP/1.1" 200 3274
+INFO 2025-10-21 18:51:45,004 basehttp "GET /mailings/create/ HTTP/1.1" 200 3759
+INFO 2025-10-23 17:09:45,746 autoreload Watching for file changes with StatReloader
+INFO 2025-10-23 17:09:49,329 basehttp "GET / HTTP/1.1" 200 3508
+WARNING 2025-10-23 17:09:49,386 log Not Found: /favicon.ico
+WARNING 2025-10-23 17:09:49,386 basehttp "GET /favicon.ico HTTP/1.1" 404 7612
+INFO 2025-10-23 17:09:58,521 basehttp "GET /users/profile/ HTTP/1.1" 200 0
+INFO 2025-10-23 17:10:10,836 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-23 17:10:13,554 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:10:15,495 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:10:16,364 basehttp "GET /mailings/ HTTP/1.1" 200 3274
+INFO 2025-10-23 17:10:18,002 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+INFO 2025-10-23 17:10:20,257 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:10:21,266 basehttp "GET /messages/create/ HTTP/1.1" 200 3239
+INFO 2025-10-23 17:10:26,798 basehttp "GET /mailings/create/ HTTP/1.1" 200 3759
+INFO 2025-10-23 17:10:38,284 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+INFO 2025-10-23 17:10:39,514 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-23 17:10:40,673 basehttp "GET /clients/create/ HTTP/1.1" 200 3602
+WARNING 2025-10-23 17:10:44,188 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:44,189 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+WARNING 2025-10-23 17:10:46,028 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:46,029 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+WARNING 2025-10-23 17:10:46,952 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:46,953 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+WARNING 2025-10-23 17:10:47,681 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:47,682 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+WARNING 2025-10-23 17:10:48,327 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:10:48,328 basehttp "GET /users/logout/ HTTP/1.1" 405 0
+INFO 2025-10-23 17:11:50,108 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-23 17:11:51,111 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:11:52,381 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+INFO 2025-10-23 17:11:53,339 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:11:53,853 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-23 17:11:55,231 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+INFO 2025-10-23 17:41:40,335 autoreload Watching for file changes with StatReloader
+INFO 2025-10-23 17:41:43,321 basehttp "GET / HTTP/1.1" 200 3508
+INFO 2025-10-23 17:41:46,753 basehttp "GET /clients/ HTTP/1.1" 200 3122
+INFO 2025-10-23 17:41:47,901 basehttp "GET /clients/create/ HTTP/1.1" 200 3602
+INFO 2025-10-23 17:41:51,519 basehttp "GET /messages/ HTTP/1.1" 200 2742
+INFO 2025-10-23 17:41:52,463 basehttp "GET /messages/create/ HTTP/1.1" 200 3239
+INFO 2025-10-23 17:41:56,734 basehttp "GET /mailings/ HTTP/1.1" 200 3274
+INFO 2025-10-23 17:41:58,836 basehttp "GET /mailings/create/ HTTP/1.1" 200 3759
+INFO 2025-10-23 17:42:04,042 basehttp "GET /statistics/ HTTP/1.1" 200 4965
+ERROR 2025-10-23 17:42:06,839 log Internal Server Error: /users/profile/
+Traceback (most recent call last):
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuvan/Py/django_kourse_work/.venv/lib/python3.12/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'profile_edit' not found. 'profile_edit' is not a valid view function or pattern name.
+ERROR 2025-10-23 17:42:06,840 basehttp "GET /users/profile/ HTTP/1.1" 500 159996
+WARNING 2025-10-23 17:42:48,330 log Method Not Allowed (GET): /users/logout/
+WARNING 2025-10-23 17:42:48,331 basehttp "GET /users/logout/ HTTP/1.1" 405 0

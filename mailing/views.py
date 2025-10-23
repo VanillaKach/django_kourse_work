@@ -1,16 +1,17 @@
 from django.core.cache import cache
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required, login_required, user_passes_test
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count, Case, When, IntegerField
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views import View
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from .models import Client, Message, Mailing, MailingLog
 from .forms import ClientForm, MessageForm, MailingForm
-from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.views.decorators.cache import cache_page
+from django.contrib.auth.models import User
 import logging
 
 
@@ -116,23 +117,6 @@ class MessageDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return Message.objects.filter(owner=self.request.user)
-
-
-class MailingListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
-    model = Mailing
-    template_name = 'mailing/mailing_list.html'
-
-    def get_queryset(self):
-        return Mailing.objects.filter(owner=self.request.user)
-
-    def test_func(self):
-        return self.request.user.is_authenticated
-
-    def get_queryset(self):
-        queryset = Mailing.objects.all()
-        if not self.request.user.is_staff:
-            queryset = queryset.filter(owner=self.request.user)
-        return queryset
 
 
 class MailingCreateView(LoginRequiredMixin, CreateView):
@@ -283,9 +267,15 @@ def home(request):
 
 
 # Для класс-базированных представлений
-class MailingListView(LoginRequiredMixin, ListView):
+class MailingListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Mailing
     template_name = 'mailing/mailing_list.html'
+
+    def get_queryset(self):
+        return Mailing.objects.filter(owner=self.request.user)
+
+    def test_func(self):
+        return self.request.user.is_authenticated
 
     @method_decorator(cache_page(60 * 5))
     def dispatch(self, *args, **kwargs):
@@ -294,6 +284,54 @@ class MailingListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = cache.get(f'mailings_{self.request.user.id}')
         if not queryset:
-            queryset = Mailing.objects.filter(owner=self.request.user)
+            queryset = Mailing.objects.all()
+            if not self.request.user.is_staff:
+                queryset = queryset.filter(owner=self.request.user)
             cache.set(f'mailings_{self.request.user.id}', queryset, 60 * 5)
         return queryset
+
+
+class MailingLogView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = MailingLog
+    template_name = 'mailing/mailing_logs.html'
+
+    def test_func(self):
+        mailing = Mailing.objects.get(pk=self.kwargs['pk'])
+        return self.request.user == mailing.owner or self.request.user.is_staff
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['mailing'] = Mailing.objects.get(pk=self.kwargs['pk'])
+        return context
+
+    def get_queryset(self):
+        return MailingLog.objects.filter(mailing_id=self.kwargs['pk'])
+
+
+class UserListView(UserPassesTestMixin, ListView):
+    model = User
+    template_name = 'mailing/user_list.html'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+class UserBlockView(UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def post(self, request, pk):
+        user = User.objects.get(pk=pk)
+        user.is_active = not user.is_active
+        user.save()
+        return redirect('mailing:user_list')
+
+
+class HomeView(TemplateView):
+    template_name = 'mailing/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_mailings'] = Mailing.objects.count()
+        context['active_mailings'] = Mailing.objects.filter(status='started').count()
+        context['unique_clients'] = Client.objects.values('email').distinct().count()
+        return context

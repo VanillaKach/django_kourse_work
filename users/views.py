@@ -43,8 +43,18 @@ class UserProfileView(LoginRequiredMixin, DetailView):
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserProfileForm
-    template_name = 'users/profile_update.html'
+    fields = ['first_name', 'last_name', 'email']
+    template_name = 'users/profile_update.html'  # ← явно укажи, чтобы не гадать
     success_url = reverse_lazy('users:profile')
 
     def get_object(self, queryset=None):
         return self.request.user
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ['first_name', 'last_name', 'email']  # или другие поля, которые можно редактировать
+    template_name = 'users/profile_form.html'
+    success_url = reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user  # всегда редактируем текущего пользователя

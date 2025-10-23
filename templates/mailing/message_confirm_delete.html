@@ -1,0 +1,18 @@
+<!-- mailing/templates/mailing/message_confirm_delete.html -->
+{% extends 'base.html' %}
+
+{% block title %}Подтверждение удаления{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h2>Удалить сообщение?</h2>
+        <p>Вы действительно хотите удалить сообщение: <strong>{{ object.subject }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Да, удалить</button>
+            <a href="{% url 'mailing:message_list' %}" class="btn btn-secondary">Отмена</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
